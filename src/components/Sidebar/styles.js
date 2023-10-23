@@ -15,6 +15,7 @@ export default makeStyles((theme) => ({
   links: {
     color: '#fff',
     textDecoration: 'none',
+    fontWeight: '700',
   },
   catImages: {
     filter: theme.palette.mode === 'dark' ? 'dark' : 'invert(0)',

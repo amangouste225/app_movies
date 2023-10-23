@@ -3,12 +3,21 @@ import ReactDOM from 'react-dom/client';
 import App from './components/App';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import store from './app/store';
+import { Provider } from 'react-redux';
 
+// Fonts styles
+import VaudThinWoff2 from './assets/fonts/Vaud_300.woff2';
 import VaudWoff2 from './assets/fonts/Vaud_400.woff2';
+import VaudSemiWoff2 from './assets/fonts/Vaud_600.woff2';
+import VaudBoldWoff2 from './assets/fonts/Vaud_700.woff2';
 
 const theme = createTheme({
   typography: {
     fontFamily: 'Vaud',
+    body1: {
+      fontWeight: 700,
+    },
   },
   components: {
     MuiCssBaseline: {
@@ -17,9 +26,31 @@ const theme = createTheme({
           font-family: 'Vaud';
           font-style: normal;
           font-display: swap;
+          font-weight: 300;
+          src: local('Vaud'), local('Vaud-Thin'), url(${VaudThinWoff2}) format('woff2');
+        },
+        @font-face {
+          font-family: 'Vaud';
+          font-style: normal;
+          font-display: swap;
           font-weight: 400;
           src: local('Vaud'), local('Vaud-Regular'), url(${VaudWoff2}) format('woff2');
-          unicodeRange: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF;
+         
+        },
+        @font-face {
+          font-family: 'Vaud';
+          font-style: normal;
+          font-display: swap;
+          font-weight: 600;
+          src: local('Vaud'), local('Vaud-Semibold'), url(${VaudSemiWoff2}) format('woff2');
+         
+        @font-face {
+          font-family: 'Vaud';
+          font-style: normal;
+          font-display: swap;
+          font-weight: 700;
+          src: local('Vaud'), local('Vaud-Bold'), url(${VaudBoldWoff2}) format('woff2');
+          
         }
       `,
     },
@@ -27,9 +58,11 @@ const theme = createTheme({
 });
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <ThemeProvider theme={theme}>
-    <Router>
-      <App />
-    </Router>
-  </ThemeProvider>
+  <Provider store={store}>
+    <ThemeProvider theme={theme}>
+      <Router>
+        <App />
+      </Router>
+    </ThemeProvider>
+  </Provider>
 );
