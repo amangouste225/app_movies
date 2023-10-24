@@ -1,12 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import App from './components/App';
 import { BrowserRouter as Router } from 'react-router-dom';
+import { Provider } from 'react-redux';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import store from './app/store';
-import { Provider } from 'react-redux';
+import App from './components/App';
 
-// Fonts styles
 import VaudThinWoff2 from './assets/fonts/Vaud_300.woff2';
 import VaudWoff2 from './assets/fonts/Vaud_400.woff2';
 import VaudSemiWoff2 from './assets/fonts/Vaud_600.woff2';
@@ -55,18 +54,11 @@ const theme = createTheme({
       `,
     },
   },
-  transitions: {
-    easing: {
-      // This is the most common easing curve.
-      easeInOut: 'cubic-bezier(0.4, 0, 0.2, 1)',
-      easeOut: 'cubic-bezier(0.0, 0, 0.2, 1)',
-      easeIn: 'cubic-bezier(0.4, 0, 1, 1)',
-      sharp: 'cubic-bezier(0.4, 0, 0.6, 1)',
-    },
-  },
 });
 
-ReactDOM.createRoot(document.getElementById('root')).render(
+const root = ReactDOM.createRoot(document.getElementById('root'));
+
+root.render(
   <Provider store={store}>
     <ThemeProvider theme={theme}>
       <Router>

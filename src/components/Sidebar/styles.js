@@ -6,6 +6,9 @@ export default makeStyles((theme) => ({
     justifyContent: 'start',
     padding: '9%',
     backgroundColor: '#000',
+    position: 'sticky',
+    top: '0',
+    zIndex: '99',
   },
 
   image: {
@@ -16,13 +19,17 @@ export default makeStyles((theme) => ({
     color: '#fff',
     textDecoration: 'none',
     fontWeight: '700',
+    '&:hover': {
+      color: 'red !important',
+    },
   },
   catImages: {
-    filter: theme.palette.mode === 'dark' ? 'dark' : 'invert(0)',
+    filter: theme.palette.mode === 'dark' ? 'dark' : 'brightness(0) invert(1);',
   },
 
   title: {
     backgroundColor: 'transparent !important',
     color: '#eaeaea !important',
   },
+  itemtext: {},
 }));

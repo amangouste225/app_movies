@@ -1,10 +1,18 @@
-import { useState, useEffect } from 'react';
 import { Box, CircularProgress, Typography } from '@mui/material';
-import { MovieList } from '../';
+import { MovieList } from '../index';
 import { useGetMoviesQuery } from '../../services/TMDB';
+import { useSelector } from 'react-redux';
+import { useState } from 'react';
 
-const Movies = () => {
-  const { data, error, isFetching } = useGetMoviesQuery();
+function Movies() {
+  const [page, setPage] = useState(1);
+  const { genreIdOrCategoryName } = useSelector(
+    (state) => state.currentGenreOrCategory
+  );
+  const { data, error, isFetching } = useGetMoviesQuery({
+    genreIdOrCategoryName,
+    page,
+  });
 
   if (isFetching) {
     return (
@@ -25,11 +33,12 @@ const Movies = () => {
     );
   }
 
-  if (error) return 'An error has occured';
+  if (error) return 'An error has occurred';
+
   return (
     <div>
       <MovieList movies={data} />
     </div>
   );
-};
+}
 export default Movies;

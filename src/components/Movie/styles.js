@@ -2,20 +2,19 @@ import { makeStyles } from '@mui/styles';
 
 export default makeStyles((theme) => ({
   movie: {
-    padding: '20px',
+    padding: '20px !important',
   },
   title: {
+    textAlign: 'center',
     textOverflow: 'ellipsis',
     color: '#fff',
-    fontSize: '16px',
-    lineHeight: '20px',
-    fontWeight: 'bolder',
+    fontSize: '16px !important',
+    fontWeight: '800 !important',
     width: '200px',
     whiteSpace: 'nowrap',
     overflow: 'hidden',
-    marginTop: '10px',
+    marginTop: '20px !important',
     marginBottom: '10px',
-
     '&:hover': {
       color: '#e13100',
     },
@@ -23,7 +22,7 @@ export default makeStyles((theme) => ({
 
   links: {
     textDecoration: 'none',
-    alignItems: 'start',
+    alignItems: 'center',
     fontWeight: 'bolder',
     [theme.breakpoints.up('xs')]: {
       display: 'flex',
@@ -39,12 +38,8 @@ export default makeStyles((theme) => ({
     borderRadius: '5px',
     marginBottom: '10px',
     height: '350px',
-    transition: {
-      duration: theme.transitions.duration.standard,
-    },
     '&:hover': {
       transform: 'scale(1.1)',
-      boxShadow: '2px 2px 2px black',
     },
   },
 
@@ -55,7 +50,7 @@ export default makeStyles((theme) => ({
   },
 
   icon: {
-    color: 'hsla(0,0%,100%,.75);',
-    fontSize: '20px',
+    color: 'hsla(0,0%,100%,.75)',
+    fontSize: '15px !important',
   },
 }));

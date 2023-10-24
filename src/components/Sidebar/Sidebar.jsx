@@ -9,12 +9,15 @@ import {
   Box,
   CircularProgress,
 } from '@mui/material';
+
 import { Link } from 'react-router-dom';
 import { useTheme } from '@mui/styles';
 import { Logo } from '../../assets';
 import useStyles from './styles';
-
+import genreIcons from '../../assets/genres';
+import { useDispatch, useSelector } from 'react-redux';
 import { useGetGenresQuery } from '../../services/TMDB';
+import { selectGenreOrCategory } from '../../features/currentGenreOrCategory';
 
 const cat = [
   { label: 'Popular', value: 'popular' },
@@ -22,17 +25,18 @@ const cat = [
   { label: 'Upcoming', value: 'upcoming' },
 ];
 
-const demo = [
-  { label: 'Action', value: 'action' },
-  { label: 'Horror', value: 'horror' },
-  { label: 'Comedy', value: 'comedy' },
-  { label: 'Animation', value: 'animation' },
-];
-
-const Sidebar = ({ setmobileOpen }) => {
+function Sidebar({ setMobileOpen }) {
   const theme = useTheme();
   const classes = useStyles();
+  const dispatch = useDispatch();
   const { data, isFetching } = useGetGenresQuery();
+  const { genreIdOrCategoryName } = useSelector(
+    (state) => state.currentGenreOrCategory
+  );
+
+  useEffect(() => {
+    setMobileOpen(false);
+  }, [genreIdOrCategoryName]);
 
   return (
     <>
@@ -46,12 +50,16 @@ const Sidebar = ({ setmobileOpen }) => {
       <Divider light={true} />
       <List style={{ padding: 0 }}>
         <ListSubheader className={classes.title}>Categories</ListSubheader>
-        {cat.map(({ label, value }) => (
+        {cat?.map(({ label, value }) => (
           <Link key={value} className={classes.links} to='/'>
-            <ListItem onClick={() => {}}>
-              {/* <ListItemIcon>
-                <img src={Logo} className={classes.catImages} height={30} />
-              </ListItemIcon> */}
+            <ListItem onClick={() => dispatch(selectGenreOrCategory(value))}>
+              <ListItemIcon>
+                <img
+                  src={genreIcons[label.toLowerCase()]}
+                  className={classes.catImages}
+                  height={30}
+                />
+              </ListItemIcon>
               <ListItemText primary={label} />
             </ListItem>
           </Link>
@@ -64,18 +72,22 @@ const Sidebar = ({ setmobileOpen }) => {
           <CircularProgress />
         </Box>
       ) : (
-        data.genres.map(({ name, id }) => (
-          <Link key={id} className={classes.links} to='/'>
-            <ListItem onClick={() => {}}>
-              {/* <ListItemIcon>
-                <img src={Logo} className={classes.catImages} height={30} />
-              </ListItemIcon> */}
-              <ListItemText primary={name} />
+        data?.genres?.map(({ name, id }) => (
+          <Link key={name} className={classes.links} to='/'>
+            <ListItem onClick={() => dispatch(selectGenreOrCategory(id))}>
+              <ListItemIcon>
+                <img
+                  src={genreIcons[name.toLowerCase()]}
+                  className={classes.catImages}
+                  height={30}
+                />
+              </ListItemIcon>
+              <ListItemText primary={name} className={classes.itemtext} />
             </ListItem>
           </Link>
         ))
       )}
     </>
   );
-};
+}
 export default Sidebar;

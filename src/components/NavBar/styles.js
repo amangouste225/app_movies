@@ -33,6 +33,10 @@ export default makeStyles((theme) => ({
   drawerPaper: {
     width: drawerWidth,
     backgroundColor: '#191919 !important',
+    overflowY: 'scroll',
+    '&::-webkit-scrollbar': {
+      display: 'none',
+    },
   },
   linkButton: {
     '&:hover': {

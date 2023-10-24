@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import {
   AppBar,
   IconButton,
@@ -8,7 +9,7 @@ import {
   useMediaQuery,
 } from '@mui/material';
 
-import { Sidebar } from '../';
+import { Link } from 'react-router-dom';
 
 import {
   Menu,
@@ -17,18 +18,17 @@ import {
   Brightness7,
 } from '@mui/icons-material';
 
-import { Link } from 'react-router-dom';
+import { Sidebar, Search } from '../';
 import { useTheme } from '@mui/material/styles';
-
+import { useSelector } from 'react-redux';
 import useStyles from './styles.js';
-import { useState } from 'react';
 
-const NavBar = () => {
-  const [mobileOpen, setmobileOpen] = useState(false);
+function NavBar() {
   const classes = useStyles();
   const isMobile = useMediaQuery('(max-width:600px)');
   const theme = useTheme();
-  const isAuthenticated = true;
+  const isAuthenticated = useSelector((state) => state.user);
+  const [mobileOpen, setMobileOpen] = useState(false);
 
   return (
     <>
@@ -40,9 +40,7 @@ const NavBar = () => {
               edge='start'
               style={{ outline: 'none' }}
               className={classes.menuButton}
-              onClick={() => {
-                setmobileOpen((prev) => !prev);
-              }}
+              onClick={() => setMobileOpen((prev) => !prev)}
             >
               <Menu />
             </IconButton>
@@ -50,7 +48,7 @@ const NavBar = () => {
           <IconButton color='inherit' sx={{ ml: 1 }} onClick={() => {}}>
             {theme.palette.mode === 'dark' ? <Brightness7 /> : <Brightness4 />}
           </IconButton>
-          {!isMobile && 'Search...'}
+          {!isMobile && <Search />}
           <div>
             {!isAuthenticated ? (
               <Button color='inherit'>
@@ -68,7 +66,7 @@ const NavBar = () => {
               </Button>
             )}
           </div>
-          {isMobile && 'Search...'}
+          {isMobile && <Search />}
         </Toolbar>
       </AppBar>
 
@@ -80,12 +78,12 @@ const NavBar = () => {
               anchor='right'
               open={mobileOpen}
               onClose={() => {
-                setmobileOpen((prev) => !prev);
+                setMobileOpen((prev) => !prev);
               }}
               classes={{ paper: classes.drawerPaper }}
               ModalProps={{ keepMounted: true }}
             >
-              <Sidebar setmobileOpen={setmobileOpen} />
+              <Sidebar setMobileOpen={setMobileOpen} />
             </Drawer>
           ) : (
             <Drawer
@@ -93,12 +91,12 @@ const NavBar = () => {
               variant='permanent'
               open
             >
-              <Sidebar setmobileOpen={setmobileOpen} />
+              <Sidebar setMobileOpen={setMobileOpen} />
             </Drawer>
           )}
         </nav>
       </div>
     </>
   );
-};
+}
 export default NavBar;

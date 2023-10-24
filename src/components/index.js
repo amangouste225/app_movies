@@ -6,6 +6,7 @@ import MovieInformation from './MovieInformation/MovieInformation';
 import Sidebar from './Sidebar/Sidebar';
 import MovieList from './MoviesList/MovieList';
 import Movie from './Movie/Movie';
+import Search from './Search/Search';
 
 export {
   Actors,
@@ -16,4 +17,5 @@ export {
   Sidebar,
   MovieList,
   Movie,
+  Search,
 };
