@@ -45,14 +45,12 @@ function NavBar() {
               <Menu />
             </IconButton>
           )}
-          <IconButton color='inherit' sx={{ ml: 1 }} onClick={() => {}}>
-            {theme.palette.mode === 'dark' ? <Brightness7 /> : <Brightness4 />}
-          </IconButton>
+
           {!isMobile && <Search />}
           <div>
             {!isAuthenticated ? (
               <Button color='inherit'>
-                Login &nbsp; <AccountCircle />
+                Sign or Register &nbsp; <AccountCircle />
               </Button>
             ) : (
               <Button

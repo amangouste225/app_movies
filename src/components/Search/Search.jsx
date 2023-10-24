@@ -5,9 +5,10 @@ const Search = () => {
   const Search = styled('div')(({ theme }) => ({
     position: 'relative',
     borderRadius: theme.shape.borderRadius,
-    backgroundColor: alpha(theme.palette.common.white, 0.15),
+    border: '1px solid #eaeaea',
+    backgroundColor: alpha(theme.palette.common.white, 0),
     '&:hover': {
-      backgroundColor: alpha(theme.palette.common.white, 0.25),
+      backgroundColor: alpha(theme.palette.common.white, 0),
     },
     marginLeft: 0,
     width: '100%',
@@ -36,9 +37,9 @@ const Search = () => {
       transition: theme.transitions.create('width'),
       width: '100%',
       [theme.breakpoints.up('sm')]: {
-        width: '20ch',
+        width: '29ch',
         '&:focus': {
-          width: '30ch',
+          width: '35ch',
         },
       },
     },
@@ -50,7 +51,7 @@ const Search = () => {
         <SearchIcon />
       </SearchIconWrapper>
       <StyledInputBase
-        placeholder='Search…'
+        placeholder='Find movies, TV shows and more'
         inputProps={{ 'aria-label': 'Search' }}
       />
     </Search>

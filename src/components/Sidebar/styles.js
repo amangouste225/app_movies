@@ -31,5 +31,4 @@ export default makeStyles((theme) => ({
     backgroundColor: 'transparent !important',
     color: '#eaeaea !important',
   },
-  itemtext: {},
 }));
