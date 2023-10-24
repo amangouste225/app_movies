@@ -14,6 +14,8 @@ import { useTheme } from '@mui/styles';
 import { Logo } from '../../assets';
 import useStyles from './styles';
 
+import { useGetGenresQuery } from '../../services/TMDB';
+
 const cat = [
   { label: 'Popular', value: 'popular' },
   { label: 'Top Rated', value: 'top_rated' },
@@ -30,6 +32,7 @@ const demo = [
 const Sidebar = ({ setmobileOpen }) => {
   const theme = useTheme();
   const classes = useStyles();
+  const { data, isFetching } = useGetGenresQuery();
 
   return (
     <>
@@ -56,16 +59,22 @@ const Sidebar = ({ setmobileOpen }) => {
       </List>
       <Divider light={true} style={{ backgroundColor: '#2e2e2e' }} />
       <ListSubheader className={classes.title}>Genres</ListSubheader>
-      {demo.map(({ label, value }) => (
-        <Link key={value} className={classes.links} to='/'>
-          <ListItem onClick={() => {}}>
-            {/* <ListItemIcon>
+      {isFetching ? (
+        <Box display='flex' justifyContent='center'>
+          <CircularProgress />
+        </Box>
+      ) : (
+        data.genres.map(({ name, id }) => (
+          <Link key={id} className={classes.links} to='/'>
+            <ListItem onClick={() => {}}>
+              {/* <ListItemIcon>
                 <img src={Logo} className={classes.catImages} height={30} />
               </ListItemIcon> */}
-            <ListItemText primary={label} />
-          </ListItem>
-        </Link>
-      ))}
+              <ListItemText primary={name} />
+            </ListItem>
+          </Link>
+        ))
+      )}
     </>
   );
 };
