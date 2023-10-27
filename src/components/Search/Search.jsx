@@ -1,7 +1,17 @@
 import { styled, alpha, InputBase } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
-
+import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { searchMovie } from '../../features/currentGenreOrCategory';
 const Search = () => {
+  const [query, setQuery] = useState();
+  const dispatch = useDispatch();
+  const handleKeyPress = (event) => {
+    if (event.code == 'Enter') {
+      dispatch(searchMovie(query));
+    }
+  };
+
   const Search = styled('div')(({ theme }) => ({
     position: 'relative',
     borderRadius: theme.shape.borderRadius,
@@ -31,13 +41,13 @@ const Search = () => {
   const StyledInputBase = styled(InputBase)(({ theme }) => ({
     color: 'inherit',
     '& .MuiInputBase-input': {
-      padding: theme.spacing(1, 1, 1, 0),
+      padding: theme.spacing(1),
       // vertical padding + font size from searchIcon
       paddingLeft: `calc(1em + ${theme.spacing(4)})`,
       transition: theme.transitions.create('width'),
       width: '100%',
-      [theme.breakpoints.up('sm')]: {
-        width: '29ch',
+      [theme.breakpoints.up('md')]: {
+        width: '26ch',
         '&:focus': {
           width: '35ch',
         },
@@ -51,6 +61,9 @@ const Search = () => {
         <SearchIcon />
       </SearchIconWrapper>
       <StyledInputBase
+        onKeyDown={handleKeyPress}
+        value={query}
+        onChange={(event) => setQuery(event.target.value)}
         placeholder='Find movies, TV shows and more'
         inputProps={{ 'aria-label': 'Search' }}
       />

@@ -37,9 +37,9 @@ export default makeStyles((theme) => ({
   image: {
     borderRadius: '5px',
     marginBottom: '10px',
-    height: '350px',
+    height: '300px',
     '&:hover': {
-      transform: 'scale(1.1)',
+      transform: 'scale(1.15)',
     },
   },
 

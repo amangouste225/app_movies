@@ -4,7 +4,7 @@ export default makeStyles((theme) => ({
   imageLink: {
     display: 'flex',
     justifyContent: 'start',
-    padding: '9%',
+    padding: '8%',
     backgroundColor: '#000',
     position: 'sticky',
     top: '0',
@@ -12,7 +12,7 @@ export default makeStyles((theme) => ({
   },
 
   image: {
-    width: '54%',
+    width: '40%',
   },
 
   links: {

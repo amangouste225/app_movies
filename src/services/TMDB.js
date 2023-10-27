@@ -10,7 +10,10 @@ export const tmdbApi = createApi({
       query: () => `genre/movie/list?api_key=158b701a02d1e4a48c156edec40ed343`,
     }),
     getMovies: builder.query({
-      query: ({ genreIdOrCategoryName, page }) => {
+      query: ({ genreIdOrCategoryName, page, searchQuery }) => {
+        if (searchQuery) {
+          return `/search/movie?query=${searchQuery}&page={page}&api_key=158b701a02d1e4a48c156edec40ed343`;
+        }
         if (
           genreIdOrCategoryName &&
           typeof genreIdOrCategoryName === 'string'
